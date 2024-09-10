@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <time.h>
+
+int main() {
+    struct timespec start, end, req, rem;
+    req.tv_sec = 1;
+    req.tv_nsec = 0;
+    
+    clock_gettime(CLOCK_REALTIME, &start);
+    nanosleep(&req, &rem);
+    clock_gettime(CLOCK_REALTIME, &end);
+    
+    printf("Elapsed time using nanosleep: %.9f seconds\n", 
+           (end.tv_sec - start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9);
+    return 0;
+}
